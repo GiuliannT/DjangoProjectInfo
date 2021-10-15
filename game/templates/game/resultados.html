@@ -1,0 +1,28 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+	
+<div class="container jumbotron bg-dark text-white mt-3">
+	<h3>{{respondida.pregunta.texto|safe}}</h3>
+	<p>
+		<strong>Your answer :</strong>
+		{{respondida.respuesta.texto|safe}}
+	</p>
+	{% if respondida.respuesta.correcta %}
+	<h4 class="text-success">¡Nice! Your answer is correct </h4>
+	{% else %}
+	<h4 class="text-danger">¡Your answer is wrong !</h4>
+		{% for respuesta in respondida.pregunta.opciones.all %}
+			{% if respuesta.correcta %}
+				<h4>The correct answer is : <span class="text-success">{{respuesta}}</span></h4>
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+	<a href="{% url 'jugar' %}">
+		<button class="btn-success">
+			Next Question 
+		</button>
+	</a>
+</div>
+
+{% endblock %}

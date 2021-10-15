@@ -1,0 +1,64 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+    Contact
+{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+    <div class="p-3 d-flex justify-content-center text-white"> 
+        
+        <form action="" method="POST" class="p-3 bg-dark">
+
+            {% if "valido" in request.GET %}
+                <p style="color: white;">Information Sent Correctly</p>
+            {% endif %}
+
+            {% if "novalido" in request.GET %}
+                <p style="color: white;">The Message Could Not Be Sent</p>
+            {% endif %}
+
+            <h1 class="text-white">Contact</h1>
+            {% csrf_token %}
+
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                </div>
+                {{miFormulario.name}}
+            </div>
+
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                 </div>
+                 {{miFormulario.email}}
+            </div> 
+
+            <div class="form-group input-group">
+                {{miFormulario.content}}
+            </div>
+
+            <form>
+                <div class="form-group">
+                    <button type="submit" value="Submit" class="btn btn-primary btn-block">Send</button>
+                </div>
+            </form>
+
+        </form>
+    </div>
+
+{% else %}
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        You Are Not Registered 
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+{% endif %}
+
+{% endblock %}

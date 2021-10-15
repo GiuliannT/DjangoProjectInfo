@@ -1,0 +1,40 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+
+    <div class="p-3 d-flex justify-content-center text-white">
+        <div class="p-3 text-center">
+            <h1 class="p-1">Welcome To The Trivia Game</h1>
+            <h4 class="p-1">The best trivia game ever</h4>
+            <p class="p-1">You will have to answer a series of questions and at the end the scoring table will be shown </p>
+        </div>
+    </div>
+
+    {% if user.is_authenticated %}
+
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <a class="btn btn-light btn-lg" style="min-width: 150px;" href="{% url 'jugar' %}">Play</a>
+                </div>
+            </div>
+        </div>
+
+    {% else %}
+
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <a class="btn btn-light btn-lg" style="min-width: 150px;" href="{% url 'Register' %}">Register</a>
+                    <a class="btn btn-light btn-lg" style="min-width: 150px;" href="{% url 'Login' %}">Login</a>
+                </div>
+            </div>
+        </div>
+
+    {% endif %}
+
+{% endblock %}
